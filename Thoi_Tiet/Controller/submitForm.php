@@ -6,6 +6,7 @@ include_once("../Model/WeatherRepository.php");
             if(is_numeric($_POST['l_on']) && is_numeric($_POST['l_at'])){
                 $weatherAPI = new WeatherRepository('412610a74c218e9e763db58706e65210');
                 $data = $weatherAPI->getWeatherByLocal($_POST['l_on'], $_POST['l_at']);
+                $notification = $data;
                 include_once("../view/weather.php");
             } else {
                 $notification = "Xin moi nhap du lieu vao la mot so";

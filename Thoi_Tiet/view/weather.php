@@ -54,8 +54,7 @@
                     <div><?php echo ucwords($data->weather[0]->description); ?></div>
                 </div>
                 <div class="weather-forecast">
-                    <img
-                            src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png"
+                    <img    src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png"
                             class="weather-icon" /> <?php echo $data->main->temp_max; ?>&deg;C<span
                             class="min-temperature"><?php echo $data->main->temp_min; ?>&deg;C</span>
                 </div>
@@ -65,6 +64,9 @@
                 </div>
                 <?php
             }
+        }
+        if($notification == 0){
+            echo "<br>Sorry He Thong Chua Kip Update Local Nay";
         }
         if($notification){
             echo "<br>".$notification;
