@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class WeatherGateWay
+ * Class WeatherRepository
  */
 class WeatherRepository
 {
