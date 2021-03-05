@@ -3,7 +3,7 @@
 /**
  * Class WeatherGateWay
  */
-class WeatherRepository implements WeatherRepositoryInterface
+class WeatherRepository
 {
 
     /**
