@@ -3,9 +3,13 @@
 /**
  * Class WeatherGateWay
  */
-class WeatherRepository implements WeatherInterface
+class WeatherRepository implements WeatherRepositoryInterface
 {
-    private $_token;
+
+    /**
+     * @var
+     */
+    protected $_token;
 
     /**
      * WeatherGateWay constructor.
@@ -15,13 +19,14 @@ class WeatherRepository implements WeatherInterface
         $token
     ) {
         $this->_token = $token;
+
     }
 
     /**
      * @return mixed
      */
     public function getJsonCode(){
-        $str = file_get_contents('city.list.json');
+        $str = file_get_contents('../city.list.json');
         // decode the JSON into an associative array
         return json_decode($str, true);
     }
@@ -40,9 +45,12 @@ class WeatherRepository implements WeatherInterface
         $arrJson = $this->getJsonCode();
         $cityId = "";
         foreach ($arrJson as $key => $value){
-            if(array_diff($local, $value['coord'])) {
+            if(!array_diff($local, $value['coord'])) {
                 $cityId = $value['id'];
                 break;
+            }
+            else {
+                $cityId = 833;
             }
         }
         try {
@@ -97,5 +105,10 @@ class WeatherRepository implements WeatherInterface
         } catch (\Exception $ce){
             return null;
         }
+    }
+
+    public function get(WeatherInterface $weatherInterface)
+    {
+        // TODO: Implement get() method.
     }
 }
