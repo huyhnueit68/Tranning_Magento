@@ -50,7 +50,7 @@ class WeatherRepository
                 break;
             }
             else {
-                $cityId = "0";
+                $cityId = "404";
             }
         }
         try {
@@ -88,8 +88,8 @@ class WeatherRepository
     public function getWeatherByCityId($cityId)
     {
         try {
-            if ($cityId == 0){
-                return 0;
+            if ($cityId == 404){
+                return 404;
             }
             $apiKey = $this->_token;
             $googleApiUrl = "http://api.openweathermap.org/data/2.5/weather?id=" . $cityId . "&lang=en&units=metric&APPID=" . $apiKey;

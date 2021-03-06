@@ -32,6 +32,16 @@
         .time {
             line-height: 25px;
         }
+        .col-1{
+            background-color: #008CBA; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -42,11 +52,14 @@
     <form action="../Controller/submitForm.php" method="POST">
         Kinh Do: <input type="text" name="l_on">
         Vi Do: <input type="text" name="l_at">
-        <input type="submit" name="submitWeather">
+        <input class="col-1" type="submit" name="submitWeather">
     </form>
     <?php
         if(isset($data)){
-            if ($data){?>
+            if ($data){
+                if($notification == 404){
+                    echo "<br>Sorry He Thong Chua Kip Update Local Nay";
+                } else {?>
                 <h2><?php echo $data->name; ?> Weather Status</h2>
                 <div class="time">
                     <div><?php echo date("l g:i a", $currentTime); ?></div>
@@ -63,14 +76,10 @@
                     <div>Wind: <?php echo $data->wind->speed; ?> km/h</div>
                 </div>
                 <?php
+                }
             }
         }
-        if($notification == 0){
-            echo "<br>Sorry He Thong Chua Kip Update Local Nay";
-        }
-        if($notification){
-            echo "<br>".$notification;
-        }
+        echo "<br>".$notification;
     ?>
 </div>
 
