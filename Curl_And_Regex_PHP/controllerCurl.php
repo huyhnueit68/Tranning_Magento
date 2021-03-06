@@ -36,12 +36,25 @@ class controllerCurl{
      */
     public function getTitleUrl()
     {
-        if(!$this->getContentUrl()){
-            return false;
-        } else {
-            $page = file_get_contents($this->_url);
-            return preg_match('/<title[^>]*>(.*?)<\/title>/ims', $page, $match) ? $match[1] : null;
-        }
+        $output = $this->getHTMLFormUrl();
+        $matches = array();
+        preg_match("/<title>(.*)<\/title>/is", $output, $matches);
+        return $matches;
+    }
+
+    /**
+     * @return bool|string
+     */
+    public function getHTMLFormUrl()
+    {
+        header('content-type:text/plain');
+        $url = $this->_url;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $output = curl_exec($ch);
+        curl_close($ch);
+        return $output;
     }
 
     /**
@@ -49,23 +62,27 @@ class controllerCurl{
      */
     public function getContentUrl()
     {
-        $url = $this->_url;
-        if(!$url || !is_string($url) || ! preg_match('/^http(s)?:\/\/[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $url)){
-            return false;
-        }
-        return true;
+        $html = $this->getHTMLFormUrl();
+        $matches = array();
+        preg_match_all('#<div[^>]*>(.*?)</div>#', $html, $matches);
+        return $matches[1];
     }
 
     /**
      * @return mixed
      */
-    public function getDateTimeUrl()
+    public function getTimeUrl()
     {
-        return $this->_url;
+        $html = $this->getHTMLFormUrl();
+        $matches = array();
+        preg_match("/^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-[0-9]{4}$/",$html, $matches);
+        return $matches;
     }
-
-
 }
 
 $infoUrl = new controllerCurl($_POST['url']);
-print_r($infoUrl->getTitleUrl());
+$title = $infoUrl->getTitleUrl()[1];
+$content = $infoUrl->getContentUrl();
+$time = $infoUrl->getTimeUrl();
+
+include_once("View/pageResult.php");

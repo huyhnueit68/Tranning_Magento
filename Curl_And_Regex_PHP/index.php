@@ -46,7 +46,7 @@
         <h3 id="lbt-header">Tranning Curl and Regex</h3>
     </div>
     <form action="controllerCurl.php" method="post" id="formLoad">
-        <br><br>URL: <input type="text" name="url" id="input2" value=<?php echo $url;?>>
+        <br><br>URL: <input type="text" name="url" id="input2">
         <br><br><input type="submit" id="submit-form" name="submitUrl">
     </form>
 </div>
