@@ -48,6 +48,7 @@
     <form action="./Controller/ctrCurl.php" method="post" id="formLoad">
         <br><br>URL: <input type="text" name="url" id="input2">
         <br><br><input type="submit" id="submit-form" name="submitUrl">
+        <p>Ex: https://vietnamnet.vn/vn/suc-khoe/viet-nam-tiem-vaccine-covid-19-4-nhom-phan-ung-sau-tiem-can-biet-717715.html</p>
     </form>
 </div>
 </body>

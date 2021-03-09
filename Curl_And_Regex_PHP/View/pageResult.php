@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,11 +30,17 @@
             echo "<h1>".htmlspecialchars($title)."</h1>";
         }
         if(isset($time)){
-            echo "<h1>Time Page: ".$time[1]."</h1>";
+            if ($time == null) {
+                echo "<h1>Time: 0</h1>";
+            } else {
+                echo "<h1>Time Page: ".$time[1]."</h1>";
+            }
         }
         if(isset($content)){
             foreach ($content as $item){
-                echo htmlspecialchars($item);
+                foreach ($item as $value){
+                    echo $value;
+                }
             }
         }
     ?>
